@@ -12,17 +12,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var users = [UserResponse]()
+    
+    //var users = [UserResponse]()
+    
+    // The String we'll use to push everything to our Table view
     var numbers: [String] = ["ABC123", "i'm the best", "not really", "some more random text"]
     
 
     @IBAction func onGetTapped(_ sender: Any) {
         
+        // Declaring the table View Controller for when we push our data to the next page.
         let vc = MyTableViewController()
         
-        
-        
-        
+        // Calls the URL (API)
         guard  let url = URL(string: "https://l3dev.com/api/workers") else{return}
         
         let session = URLSession.shared
@@ -37,12 +39,12 @@ class ViewController: UIViewController {
                     
                     
                     
-                    
+                    // Parsing the Data within a For Each loop
                     users.users.forEach {
                         print($0.first_name)
                         self.numbers.append("33xxxxxxxxxxxxxxxxxx") // append to numbers not working..
-                        numbers += ["3321"]
-                        self.numbers += ["3321"]
+                        numbers += ["3321"] // test
+                        self.numbers += ["3321"] // test
                     }
                     
                     
@@ -64,11 +66,13 @@ class ViewController: UIViewController {
                     }
     */
                     
-                } catch{ print(error) }
+                } catch{ print(error) } // Print error later push to logs
             }
-        task.resume()
+        task.resume() // reuse normal use
         
+        // adding our array to our Table View Controller
         vc.mobles = numbers
+        // Load the Table View Contoller page on load.
         navigationController?.pushViewController(vc, animated: true)
         
         
