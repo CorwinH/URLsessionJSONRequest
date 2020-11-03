@@ -11,20 +11,51 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    
+    var users = [UserResponse]()
+    var numbers: [String] = ["ABC123", "i'm the best", "not really", "some more random text"]
+    
 
     @IBAction func onGetTapped(_ sender: Any) {
         
-        guard  let url = URL(string: "https://l3dev.com/api/user/312819076523281302") else{return}
+        let vc = MyTableViewController()
+        
+        
+        
+        
+        guard  let url = URL(string: "https://l3dev.com/api/workers") else{return}
         
         let session = URLSession.shared
-        let task = session.dataTask(with: url) { (data, response, error) in
+        let task = session.dataTask(with: url) { [self] (data, response, error) in
             guard let data = data else { return }
                 do{
                     /*let json = try JSONSerialization.jsonObject(with: data, options: [])
                     print(json)*/
                     
-                    let users = try JSONDecoder().decode(User.self, from: data)
-                    print("ID -> " + users.first_name)
+                    let users = try JSONDecoder().decode(UserResponse.self, from: data)
+                    //print(users)
+                    
+                    
+                    
+                    
+                    users.users.forEach {
+                        print($0.first_name)
+                        self.numbers.append("33xxxxxxxxxxxxxxxxxx") // append to numbers not working..
+                        numbers += ["3321"]
+                        self.numbers += ["3321"]
+                    }
+                    
+                    
+                    
+                    
+                    /*
+                    for user in users{
+                        print([user.users])
+                    }
+ */
+                    
+                    
+                    //print("ID -> " + users.first_name)
                     
                     /* if array using decode([User].self,....)*/
  /*(
@@ -36,6 +67,11 @@ class ViewController: UIViewController {
                 } catch{ print(error) }
             }
         task.resume()
+        
+        vc.mobles = numbers
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
     
@@ -74,6 +110,5 @@ class ViewController: UIViewController {
     
 
 }
-
 
 

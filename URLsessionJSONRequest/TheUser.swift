@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct User: Decodable {
+struct UserResponse: Decodable {
+
+    let users: [Workers]
+    /*
     let id: String
     let first_name: String
     let last_name: String
@@ -15,5 +18,16 @@ struct User: Decodable {
     let last_login: String
     let user_type: String
     let created_date: String
+ */
     //let user_auth: [String: String]
+}
+struct Workers: Decodable {
+    //let id: String
+    let first_name: String
+    let last_name: String
+    let email: String
+    let last_login: String
+    let user_type: String
+    let created_date: String
+    
 }
