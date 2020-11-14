@@ -136,16 +136,18 @@ class ViewController: UIViewController {
     
     @IBAction func onPostTapped(_ sender: Any) {
         
-        let parameters = ["email": "CorwinHill@L3git.com", "id": "312819076523281302"]
-        //https://l3dev.com/api/login/312819076523281302 /// need to setup API for login POST, then it should create a "Key" that can be used to grab info
-        //https://jsonplaceholder.typicode.com/posts
+        let parameters = ["pa": "password123", "em": "worker1@L3git.com"] // change this to grab the text box texts.
+        // before we pass the paramters we need to encrip the password sha512
         
-        guard  let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {return}
+        guard  let url = URL(string: "https://L3dev.com/api/p_login/") else {return}
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
-            return }
+        
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        else { return }
+        
         request.httpBody = httpBody
         
         let session = URLSession.shared
