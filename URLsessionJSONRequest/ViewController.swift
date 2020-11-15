@@ -9,11 +9,10 @@ import UIKit
 
 
 
-
 class ViewController: UIViewController {
     
-    
-    
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPass: UITextField!
     
     //var users = [UserResponse]()
     
@@ -104,11 +103,7 @@ class ViewController: UIViewController {
         
         
         
-           
-        
-        
-            
-        
+
         
         
         
@@ -132,11 +127,12 @@ class ViewController: UIViewController {
     
     
     
-    
-    
     @IBAction func onPostTapped(_ sender: Any) {
         
-        let parameters = ["pa": "password123", "em": "worker1@L3git.com"] // change this to grab the text box texts.
+        let The_Email_Text: String = txtEmail.text!
+        let The_Pass_Text: String = txtPass.text!
+        
+        let parameters = ["pa": The_Pass_Text, "em": The_Email_Text] // change this to grab the text box texts.
         // before we pass the paramters we need to encrip the password sha512
         
         guard  let url = URL(string: "https://L3dev.com/api/p_login/") else {return}
@@ -151,16 +147,20 @@ class ViewController: UIViewController {
         request.httpBody = httpBody
         
         let session = URLSession.shared
+        
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
-                print(response)
+                //print(response)
             }
+            let response_server = response as! HTTPURLResponse
+            
+            print(response_server.statusCode)
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
+                    //print(json)
                 } catch {
-                    print(error)
+                    //print(error)
                 }
             }
         }.resume()
