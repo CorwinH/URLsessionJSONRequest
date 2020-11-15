@@ -154,7 +154,17 @@ class ViewController: UIViewController {
             }
             let response_server = response as! HTTPURLResponse
             
-            print(response_server.statusCode)
+            //print(response_server.statusCode)
+            
+            if(response_server.statusCode == 202){
+                DispatchQueue.main.async {
+                self.navigationController?.pushViewController(MyTableViewController(), animated: true)
+                }
+            }
+            else{
+                print("Login Failed")
+            }
+            
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -164,8 +174,7 @@ class ViewController: UIViewController {
                 }
             }
         }.resume()
-        
-        
+       
     }
     
     
