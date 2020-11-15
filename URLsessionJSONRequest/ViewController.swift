@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var numbers: [String] = ["ABC123"]
     var fox = 0
     
-    
+/*
     
 
     @IBAction func onGetTapped(_ sender: Any) {
@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         
         
     }
-    
+    */
     
     
     @IBAction func onPostTapped(_ sender: Any) {

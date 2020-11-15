@@ -14,15 +14,6 @@ class MyTableViewController: UITableViewController {
     private var loading = true
     
     
-    
-    
-    
-   
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,7 +74,7 @@ class MyTableViewController: UITableViewController {
                     
                     // Parsing the Data within a For Each loop
                     users.users.forEach {
-                        print($0.first_name)
+                        //print($0.first_name)
                         mobles.append($0.first_name) // append to numbers not working..
                         //print(users.users.endIndex)
                         i = i+1
