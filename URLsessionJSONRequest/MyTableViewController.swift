@@ -52,6 +52,25 @@ class MyTableViewController: UITableViewController {
         return cell // call the cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) // identifer
+        //mobles[indexPath.row]
+        print(mobles[indexPath.row])
+        
+        
+        /// Calls the "View Contoler with ID as a popover.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let sec = storyboard.instantiateViewController(identifier: "testview123")
+        sec.modalPresentationStyle = .popover
+        sec.modalTransitionStyle = .crossDissolve
+        
+        present(sec, animated: true, completion: nil)
+        /// End Popover
+        
+    }
+    
     private func theapi(){
         /**/
         
@@ -76,6 +95,7 @@ class MyTableViewController: UITableViewController {
                     users.users.forEach {
                         //print($0.first_name)
                         mobles.append($0.first_name) // append to numbers not working..
+                        
                         //print(users.users.endIndex)
                         i = i+1
                         //print(i)
