@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AudioToolbox
 
 
 class ViewController: UIViewController {
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         //var psuhit = 0
         
         // Calls the URL (API)
-        guard  let url = URL(string: "https://l3dev.com/api/workers") else{return}
+        guard  let url = URL(string: "https://all360solutions.com/api/workers") else{return}
         
         let session = URLSession.shared
         let task = session.dataTask(with: url) { [self] (data, response, error) in
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
         let parameters = ["pa": The_Pass_Text, "em": The_Email_Text] // change this to grab the text box texts.
         // before we pass the paramters we need to encrip the password sha512
         
-        guard  let url = URL(string: "https://L3dev.com/api/p_login/") else {return}
+        guard  let url = URL(string: "https://all360solutions.com/api/p_login/") else {return}
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -152,17 +152,21 @@ class ViewController: UIViewController {
             if let response = response {
                 //print(response)
             }
-            let response_server = response as! HTTPURLResponse
+            
+            if let response_server = response as? HTTPURLResponse{ // acts as a try catch on the nil error
+                if(response_server.statusCode == 202){
+                    DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(MyTableViewController(), animated: true)
+                    }
+                }
+            }
             
             //print(response_server.statusCode)
             
-            if(response_server.statusCode == 202){
-                DispatchQueue.main.async {
-                self.navigationController?.pushViewController(MyTableViewController(), animated: true)
-                }
-            }
+            
             else{
                 print("Login Failed")
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
             }
             
             if let data = data {

@@ -56,7 +56,7 @@ class MyTableViewController: UITableViewController {
         /**/
         
         // Calls the URL (API)
-        guard  let url = URL(string: "https://l3dev.com/api/workers") else{return}
+        guard  let url = URL(string: "https://all360solutions.com/api/workers") else{return}
         
         let session = URLSession.shared
         let task = session.dataTask(with: url) { [self] (data, response, error) in
